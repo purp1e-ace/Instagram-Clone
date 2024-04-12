@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>insta485</title>
+</head>
+
+<body style="width: 800px;">
+    <div>
+        <a href="/"><img src="/static/images/logo.png" alt="insta logo"></a>
+        <p class="topnav-item">
+            <a href="/accounts/login/">login</a>
+        </p>
+        <hr>
+    </div>
+
+    <form action="/accounts/?target=/" method="post" enctype="multipart/form-data">
+        <input type="text" name="username" required />
+        <input type="password" name="password" required />
+        <input type="submit" value="login" />
+        <input type="hidden" name="operation" value="login" />
+    </form>
+
+    <h4>Dont have an account? <a href="/accounts/create/">Sign up!</a></h4>
+
+</body>
+
+</html>

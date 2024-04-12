@@ -1,0 +1,77 @@
+.profilepic {
+  width: 36px;
+  height: 36px;
+}
+
+.timestamp {
+  color: gray;
+  float: right;
+}
+
+.postpic {
+  width: 500px;
+  height: 500px;
+}
+
+.post-inner {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 510px;
+  padding: 12px;
+  margin: 12px auto;
+}
+
+.post-outer {
+  padding: 6px;
+  background-color: white;
+}
+
+.follow-inner {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 600px;
+  padding: 12px;
+  margin: 12px;
+}
+
+.follow-outer {
+  padding: 2px;
+  background-color: white;
+}
+
+.topnav-item {
+  float: right;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.postpic-homepage {
+  max-width: 300px;
+}
+
+.follow-status {
+  color: gray;
+  float: right;
+}
+
+.post-single {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 800px;
+}
+
+.float-postpic{
+  width: 500px;
+  float: left;
+  padding: 10px;
+}
+
+.float-postinfo{
+  width: 250px;
+  float: left;
+  padding: 10px;
+}
+
+.clear {
+  clear: both;
+}

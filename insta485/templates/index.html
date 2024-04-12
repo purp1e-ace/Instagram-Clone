@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>insta485</title>
+</head>
+
+<body style="width: 800px;">
+
+    <div id="reactEntry">
+        Loading ...
+    </div>
+    <!-- Load JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bundle.js') }}"></script>
+
+
+    <div>
+        <a href="/"><img src="/static/images/logo.png" alt="insta logo"></a>
+        <p class="topnav-item">
+            <a href="/explore/">explore</a>|<a href="/users/{{logname}}/">{{logname}}</a>
+        </p>
+        <hr>
+    </div>
+
+    <div>
+        {% for post in posts %}
+        <div class="post-outer">
+            <div class="post-inner">
+                <p>
+                    <a href="/users/{{post.owner}}/">
+                        <img class="profilepic" src="{{url_for('uploads', filename=post.owner_image)}}" alt="pic">
+                        <b>{{post.owner}}</b>
+                    </a>
+                    <a class="timestamp" href="/posts/{{post.postid}}/"><b>{{post.created}}</b></a><br>
+                </p>
+                <img class="postpic" src="{{url_for('uploads', filename=post.filename)}}" alt="pic"><br>
+                <p>
+
+                    {{post.likes}}
+                    {% if post.likes==1 %}
+                    like
+                    {% else %}
+                    likes
+                    {% endif %}<br>
+
+                    {% for comment in post.comments %}
+                    <a href="/users/{{comment.owner}}/"><b>{{comment.owner}} </b></a>{{comment.text}}<br>
+                    {% endfor %}
+                </p>
+                <!-- like button -->
+                {% if post.liked == False %}
+                <form action="/likes/?target=/" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="operation" value="like" />
+                    <input type="hidden" name="postid" value="{{post.postid}}" />
+                    <input type="submit" name="like" value="like" />
+                </form>
+                {% endif %}
+                {% if post.liked == True %}
+                <form action="/likes/?target=/" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="operation" value="unlike" />
+                    <input type="hidden" name="postid" value="{{post.postid}}" />
+                    <input type="submit" name="unlike" value="unlike" />
+                </form>
+                {% endif %}
+                <!-- comment chunk -->
+                <form action="/comments/?target=/" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="operation" value="create" />
+                    <input type="hidden" name="postid" value="{{post.postid}}" />
+                    <input type="text" name="text" required />
+                    <input type="submit" name="comment" value="comment" />
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+<!-- <body>
+  <!-- Plain old HTML and jinja2 nav bar goes here ->
+
+
+  <div id="reactEntry">
+    Loading ...
+  </div>
+  <!-- Load JavaScript ->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bundle.js') }}"></script>
+</body> -->
+
+</html>

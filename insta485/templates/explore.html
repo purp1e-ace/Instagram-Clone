@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+{% from 'macros.html' import follow_button, unfollow_button %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>insta485</title>
+</head>
+
+<body style="width: 800px;">
+    <div>
+        <a href="/"><img src="/static/images/logo.png" alt="insta logo"></a>
+        <p class="topnav-item">
+            <a href="/explore/">explore</a>|<a href="/users/{{logname}}/">{{logname}}</a>
+        </p>
+        <hr>
+    </div>
+
+    <div>
+        <h1>Discover People</h1><br>
+        {% for user in not_following %}
+        <div class="follow-outer">
+            <div class="follow-inner">
+                <a href="/users/{{user.username}}/"><img class="profilepic"
+                        src="{{url_for('uploads',filename=user.filename)}}"
+                        alt="post {{user.username}}"><b>{{user.username}}</b></a>
+                {{ follow_button(url_for(request.endpoint, **request.view_args), user.username) }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

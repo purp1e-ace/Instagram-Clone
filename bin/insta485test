@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# insta485test
+#
+# Run all tests for the project
+
+# 1. Stop on errors, print commands
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Eeuo pipefail
+set -x
+
+pytest -v tests
+
+# 2. 3. Style check
+pycodestyle insta485
+pydocstyle insta485
+
+# 4. Run pylint
+pylint --disable=cyclic-import --unsafe-load-any-extension=y insta485
+
+
+# 5. Runs all unit tests

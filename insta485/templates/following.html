@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% from 'macros.html' import follow_button, unfollow_button %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>insta485</title>
+</head>
+
+<body style="width: 800px;">
+    <div>
+        <a href="/"><img src="/static/images/logo.png" alt="insta logo"></a>
+        <p class="topnav-item">
+            <a href="/explore/">explore</a>|<a href="/users/{{logname}}/">{{logname}}</a>
+        </p>
+        <hr>
+    </div>
+
+
+    <div>
+        <h1>Following</h1><br>
+        {% for following in followings %}
+        <div class="follow-outer">
+            <div class="follow-inner">
+                <a href="/users/{{following.username}}/"><img class="profilepic"
+                        src="{{url_for('uploads',filename=following.filename)}}"
+                        alt="profilepic {{following.username}}"><b>{{following.username}}</b></a>
+
+                {% if following.is_followed_back%}
+                <span class="follow-status">following</span>
+                <!-- "my current url:  url_for(request.endpoint, **request.view_args) -->
+                {{ unfollow_button(url_for(request.endpoint, **request.view_args),following.username) }}
+                {% elif logname==following.username%}
+                <!-- blank -->
+                {% else %}
+                <span class="follow-status">not following</span>
+                {{ follow_button(url_for(request.endpoint, **request.view_args),following.username) }}
+                {% endif %}
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</body>
+
+</html>

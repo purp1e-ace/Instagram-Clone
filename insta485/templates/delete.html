@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>insta485</title>
+</head>
+
+<body style="width: 800px;">
+    <div>
+        <a href="/"><img src="/static/images/logo.png" alt="insta logo"></a>
+        <p class="topnav-item">
+            <a href="/explore/">explore</a>|<a href="/users/{{logname}}/">{{logname}}</a>
+        </p>
+        <hr>
+    </div>
+
+
+    <h4>{{logname}}</h4>
+<!-- DO NOT CHANGE THIS -->
+<form action="/accounts/?target=/" method="post" enctype="multipart/form-data">
+  <input type="submit" name="delete" value="confirm delete account"/>
+  <input type="hidden" name="operation" value="delete"/>
+</form>
+
+</body>
+
+</html>

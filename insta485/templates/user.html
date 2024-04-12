@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+{% from 'macros.html' import follow_button, unfollow_button %}
+
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>insta485</title>
+</head>
+
+<body style="width: 800px;">
+    <div>
+        <a href="/"><img src="/static/images/logo.png" alt="insta logo"></a>
+        <p class="topnav-item">
+            <a href="/explore/">explore</a>|<a href="/users/{{logname}}/">{{logname}}</a>
+        </p>
+        <hr>
+    </div>
+
+
+    <div class="user-page">
+        <h1>{{user.username}}</h1><br>
+
+        {% if its_me %}
+        <a class="edit" href="/accounts/edit/">Edit profile</a><br>
+        <form action="/accounts/logout/" method="post" enctype="multipart/form-data">
+            <input type="submit" name="logout" value="Logout" />
+        </form>
+        {% else %}
+        {% if im_following==1 %}
+        <span class="follow-status">following</span>
+        {{ unfollow_button(url_for(request.endpoint, **request.view_args),user.username) }}
+        {% else %}
+        <span class="follow-status">not following</span>
+        {{ follow_button(url_for(request.endpoint, **request.view_args),user.username) }}
+        {% endif %}
+        {% endif %}
+
+
+        {{posts.count}}
+        {% if posts.count==1 %}
+        post
+        {% else %}
+        posts
+        {% endif %}
+        <a href="/users/{{user.username}}/followers/"><b>{{follow.ers}}
+                {% if follow.ers==1 %}
+                follower
+                {% else %}
+                followers
+                {% endif %}</b></a>
+        <a href="/users/{{user.username}}/following/"><b>{{follow.ing}} following</b></a> <br><br>
+        {{user.fullname}}<br><br>
+
+        {% if its_me %}
+        <!-- file upload box -->
+        <form action="/posts/?target={{url_for(request.endpoint, **request.view_args)}}" method="post"
+            enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required />
+            <input type="submit" name="create_post" value="upload new post" />
+            <input type="hidden" name="operation" value="create" />
+        </form>
+        {% endif %}
+
+        {% for post in posts.data %}
+        <a href="/posts/{{post.postid}}/"><img class="postpic-homepage"
+                src="{{url_for('uploads',filename=post.filename)}}" alt="post {{post.postid}}"></a>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

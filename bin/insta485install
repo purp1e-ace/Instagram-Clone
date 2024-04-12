@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# insta485install
+#
+# install insta485
+#
+# Ziyi Zhou <zhouziy@umich.edu>
+
+
+# Stop on errors, print commands
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Eeuo pipefail
+set -x
+
+# Create a Python virtual environment
+python3 -m venv env
+
+# Activate Python virtual environment
+source env/bin/activate
+
+# Install back end
+pip install -r requirements.txt
+pip install -e .
+
+# Install front end
+npm ci .

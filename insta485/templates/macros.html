@@ -1,0 +1,17 @@
+{% macro follow_button(current_link,target_user) %}
+<!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+<form action="/following/?target={{current_link}}" method="post" enctype="multipart/form-data">
+    <input type="submit" name="follow" value="follow" />
+    <input type="hidden" name="username" value="{{target_user}}" />
+    <input type="hidden" name="operation" value="follow" />
+</form>
+{% endmacro %}
+
+{% macro unfollow_button(current_link,target_user) %}
+<!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+<form action="/following/?target={{current_link}}" method="post" enctype="multipart/form-data">
+    <input type="submit" name="unfollow" value="unfollow" />
+    <input type="hidden" name="username" value="{{target_user}}" />
+    <input type="hidden" name="operation" value="unfollow" />
+</form>
+{% endmacro %}
